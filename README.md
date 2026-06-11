@@ -1,6 +1,6 @@
 # Adversarial Machine Learning for Cybersecurity
 
-This repository demonstrates the application of adversarial machine learning techniques against a neural network-based Intrusion Detection System (IDS). The project evaluates how carefully crafted adversarial examples can degrade model performance and explores defensive strategies for improving robustness.
+This repository presents a research series evaluating the vulnerability of neural network-based intrusion detection systems (IDS) to adversarial machine learning attacks. Using a cybersecurity network traffic dataset, a feedforward neural network is trained as the IDS victim model and subjected to three progressively sophisticated adversarial attack techniques: Fast Gradient Sign Method (FGSM), Projected Gradient Descent (PGD), and Adversarial Weight Perturbation (AWP). Each notebook follows a consistent pipeline — data loading, feature engineering, model training, attack implementation, and multi-metric evaluation — allowing direct comparison across attack types. The central hypothesis across all three studies is that adversarial attacks, even when constrained to small perturbation budgets, can significantly degrade IDS detection performance, with more iterative and weight-space attacks proving increasingly effective at evading detection. This work serves as a proof of concept for understanding adversarial threats to AI-driven security systems and motivates the need for robust defenses in real-world deployments.
 
 ## Research Objectives
 
@@ -86,7 +86,11 @@ Topics:
 
 ## Key Findings
 
-This research demonstrates that even highly accurate intrusion detection systems can be vulnerable to adversarial manipulation. As attack sophistication increases from FGSM to PGD and weight-space perturbation methods, model performance degrades significantly unless defensive measures are implemented.
+Across all three notebooks, the results consistently demonstrate that neural network-based intrusion detection systems are meaningfully vulnerable to adversarial manipulation. FGSM established that even a single-step perturbation is sufficient to drive model accuracy below 25% and push attack success rates above 65% at modest epsilon values. 
+
+PGD extended this finding by showing that iterative attacks within the same perturbation budget are substantially more destructive, converging to near-worst-case adversarial examples that collapse the model's ROC AUC toward random chance. AWP introduced a fundamentally different threat vector — attacking the model's internal weights rather than its inputs — and revealed that standard training produces models in sharp loss landscape minima that are brittle to parameter-space perturbations, while AWP-augmented training produces more resilient flat minima. 
+
+Together, these three studies form a layered picture of adversarial risk: input-space attacks like FGSM and PGD represent deployment-time threats where adversaries craft malicious network traffic, while weight-space attacks like AWP represent infrastructure threats such as model poisoning or tampering. Effective defense of AI-driven security systems will require combining adversarial training, robust architecture choices, and model integrity verification to address threats across all of these dimensions.
 
 ---
 
