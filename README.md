@@ -96,4 +96,3 @@ Greg Mamoyac
 
 Information Security | Cybersecurity Research | Machine Learning Security
 
-California State University, Los Angeles
